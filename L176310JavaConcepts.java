@@ -36,40 +36,67 @@ public class L176310JavaConcepts
         Driver();
         
     }
-    int Menu()
-    {
-        System.out.println("Press 1 to check your due date for fee");
-        System.out.println("Press 2 to pay Fee");
-        Scanner input = new Scanner(System.in);
-        int choice=input.nextInt();
-        return choice;
-    }
-    static void Driver()
+    
+    static void Menu()
     {
         FitnessCenter f1=new Gym();
         FitnessCenter f2=new SwimmingPool();
         FitnessCenter f3=new TennisCourt();
         FitnessCenter f4=new YogaCenter();
-          
         
-        Regular c1=new Regular("Hamza",123456,19,"12-8-19");
-        Members c2=new Members("Hassan",129877,24,"15-9-19");
-        String CurrDate="14-9-19";
-        
-        c1.SetClientID(1);
-        c2.SetClientID(2);
-       
-        
-        f1.addClient(c1);
-        f1.addClient(c2);
-        c1.availFacility(f1);
-        
-        System.out.println("Press 1 if you are a member.Press 2 if you are a regular client");
         Scanner input=new Scanner(System.in);
-        int clientType=input.nextInt();
+           String CurrDate="14-9-19";
+        
+      
+        System.out.println("Enter your name");
+        String name=input.next();
+        System.out.println("Enter your cnic");
+        int cnic=input.nextInt();
+        System.out.println("Enter your age");
+        int age=input.nextInt();
        
-        if(clientType==2)
+       
+        System.out.println("Press 1 to be a member and Press 2 to be a Regular client");
+        int choice= input.nextInt();
+        if(choice==1)
         {
+            Members m1=new Members(name,cnic,age,"11-7-19");
+            m1.client_id=1;
+            m1.Avail(f1, f2, f3, f4);
+            System.out.println("Press 1 to be see due date+fees");
+                choice=input.nextInt();
+                if(choice==1)
+                {
+                   String DueDate= m1.CalculateDueDate(); 
+                   System.out.println("DueDate:  "+DueDate);
+                   int fee=m1.CalculateFee();
+                   System.out.println("Fee:  "+fee);
+                   
+                    boolean trig=m1.RemoveOrKeep(DueDate, CurrDate);
+                    if(trig==false)
+                    {
+                        System.out.println("Press 2 to pay fee");
+                        choice=input.nextInt();
+                        if(choice==2 )
+                        {
+                            m1.payFee(CurrDate);
+                            System.out.println("Press 1 to Request DownGrade");
+                          choice=input.nextInt();
+                          if(choice==1)
+                          {
+                           DownGrade(m1,f1,f2,f3,f4);
+                          }
+                        }
+                    }
+                }
+        }
+        else if(choice==2)
+        {
+            Regular r1=new Regular(name,cnic,age,"15-7-19");
+            r1.client_id=1;
+            f1.addClient(r1);
+            r1.availFacility(f1);
+            
             System.out.println("In how many facilities do you want to register?");
             int count=input.nextInt();
             if (count <4)
@@ -77,42 +104,58 @@ public class L176310JavaConcepts
                 for(int i=0;i<count;i++)
                 {
                     System.out.println(" \n Press 1 if you want to join the Swimming Pool.Press 2 to join TennisCourt.Press 3 to join yogaCenter");
-                    int choice=input.nextInt();
+                     choice=input.nextInt();
                     switch(choice)
                     {
                         case 1:
-                            c1.availFacility(f2);
+                            r1.availFacility(f2);
                             break;
                         case 2:
-                            c1.availFacility(f3);
+                            r1.availFacility(f3);
                             break;
                         case 3:
-                            c1.availFacility(f4);
+                            r1.availFacility(f4);
                             break;
                     } 
                 }
-                
-           System.out.println("Your fee is  "+ c1.CalculateFee());
-           String dueDate=(c1.CalculateDueDate());
-           if(c1.RemoveOrKeep(dueDate,CurrDate)) 
-           {
-               f1.removeClient(c1);
-           }
-        }
             }
-             if(clientType==1)
-             {
-               System.out.println("Your fee is  "+ c2.CalculateFee());
-               String dueDate=(c2.CalculateDueDate());
-               if(c2.RemoveOrKeep(dueDate,CurrDate)) 
-               {
-                   f1.removeClient(c2);
-               }
-             }
-      System.out.println("Request to Upgrade Regular");
-      Upgrade(c1,f1,f2,f3,f4);
-      System.out.println("Request to DownGrade Member");
-      DownGrade(c2,f1,f2,f3,f4);
+                System.out.println("Press 1 to be see due date+fees");
+                choice=input.nextInt();
+                if(choice==1)
+                {
+                   String DueDate= r1.CalculateDueDate();
+                   System.out.println("DueDate:  "+DueDate);
+                   int fee=r1.CalculateFee();
+                   System.out.println("Fee:  "+fee);
+                   boolean trig=r1.RemoveOrKeep(DueDate, CurrDate);
+                    if(trig==false)
+                    {
+                        System.out.println("Press 2 to pay fee");
+                        choice=input.nextInt();
+                        if(choice==2 )
+                        {
+                            r1.payFee(CurrDate);
+                            System.out.println("Press 1 to Request Upgrade");
+                          choice=input.nextInt();
+                          if(choice==1)
+                          {
+                           Upgrade(r1,f1,f2,f3,f4);
+                          }
+                        }
+                    }
+                }
+            
+              
+        }
+    }
+    
+    static void Driver()
+    {
+                
+         Menu();
+            
+      
+     
        
     }
 

@@ -47,6 +47,8 @@ import java.util.List;
         if(power==0)
         {
             System.out.println("Character has been WASTED :(");
+            
+            
         }
     }
     Boolean checkInstance(Characters s)
@@ -257,7 +259,7 @@ class Warrior extends Humans
     } 
 }
 
-class Game
+ class Game
 {
     List<Characters> charList=new ArrayList<>(5);
 

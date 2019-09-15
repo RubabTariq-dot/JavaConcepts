@@ -18,7 +18,7 @@ public class Client
     int Age;
     
     String RegistrationDate; //Date-Month-Year
-    int client_id;
+    public  int client_id;
     public String CalculateDueDate()
     {
         String[] Date = RegistrationDate.split("-");
@@ -73,12 +73,10 @@ public class Client
                  System.out.print("You have Over Due Fees \n");
             }
 
-            if(month-due_month>1)
-            {
-                
+           else if(month-due_month>=1)
+            { 
                 System.out.println("Client removed due to over due fees");
                 return true;
-                
             }
             return false;
      }

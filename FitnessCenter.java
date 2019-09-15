@@ -56,9 +56,7 @@ public class FitnessCenter
       newReg.client_id=m.client_id;
       m.Remove(gym, s_pool,t_court, y_center);
         Scanner input=new Scanner(System.in);
-        int clientType=input.nextInt();
-        if(clientType==2)
-        {
+        
             System.out.println("In how many facilities do you want to register?");
             int count=input.nextInt();
             if (count <4)
@@ -82,9 +80,9 @@ public class FitnessCenter
                 }
             }
         
-      System.out.print("DownGrade Successful");
-        }
+    System.out.print("DownGrade Successful");
   }
 }
+
 
 

@@ -7,6 +7,7 @@ package l176310.java.concepts.clientInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -32,7 +33,7 @@ public class FitnessCenter
         NumberOfClients--;
     }
     
-  static void Upgrade(Regular c,FitnessCenter gym,FitnessCenter s_pool,FitnessCenter t_court,FitnessCenter y_center)
+  public static void Upgrade(Regular c,FitnessCenter gym,FitnessCenter s_pool,FitnessCenter t_court,FitnessCenter y_center)
     {
         Members newMem=new Members(c.Name,c.CreditCardNumber,c.Age,c.RegistrationDate);
         newMem.client_id=c.client_id;
@@ -46,15 +47,44 @@ public class FitnessCenter
         s_pool.addClient(newMem);
         t_court.addClient(newMem);
         y_center.addClient(newMem);
+        System.out.println("Upgrade Successful");
     }
   
-  static void DownGrade(Members m,FitnessCenter gym,FitnessCenter s_pool,FitnessCenter t_court,FitnessCenter y_center)
+  public static void DownGrade(Members m,FitnessCenter gym,FitnessCenter s_pool,FitnessCenter t_court,FitnessCenter y_center)
   {
       Regular newReg=new Regular(m.Name,m.CreditCardNumber,m.Age,m.RegistrationDate);
       newReg.client_id=m.client_id;
-      
+      m.Remove(gym, s_pool,t_court, y_center);
+        Scanner input=new Scanner(System.in);
+        int clientType=input.nextInt();
+        if(clientType==2)
+        {
+            System.out.println("In how many facilities do you want to register?");
+            int count=input.nextInt();
+            if (count <4)
+            {
+                for(int i=0;i<count;i++)
+                {
+                        System.out.println(" \n Press 1 if you want to join the Swimming Pool.Press 2 to join TennisCourt.Press 3 to join yogaCenter");
+                        int choice=input.nextInt();
+                        switch(choice)
+                        {
+                            case 1:
+                                newReg.availFacility(s_pool);
+                                break;
+                            case 2:
+                                newReg.availFacility(t_court);
+                                break;
+                            case 3:
+                                newReg.availFacility(y_center);
+                                break;
+                        } 
+                }
+            }
+        
+      System.out.print("DownGrade Successful");
+        }
   }
-    
 }
 
 

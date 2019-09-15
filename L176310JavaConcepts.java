@@ -9,6 +9,8 @@ import java.lang.reflect.Member;
 import java.util.Scanner;
 import l176310.java.concepts.clientInfo.Client;
 import l176310.java.concepts.clientInfo.FitnessCenter;
+import static l176310.java.concepts.clientInfo.FitnessCenter.DownGrade;
+import static l176310.java.concepts.clientInfo.FitnessCenter.Upgrade;
 import l176310.java.concepts.clientInfo.Members;
 import l176310.java.concepts.clientInfo.Regular;
 
@@ -25,16 +27,23 @@ public class L176310JavaConcepts
     public static void main(String[] args) 
     {
         //QUESTION 1
-        Game g1=new Game();
-        g1.Run();
+      //  Game g1=new Game();
+        //g1.Run();
         
        
         
         //QUESTION2
-        //Driver();
+        Driver();
         
     }
-    
+    int Menu()
+    {
+        System.out.println("Press 1 to check your due date for fee");
+        System.out.println("Press 2 to pay Fee");
+        Scanner input = new Scanner(System.in);
+        int choice=input.nextInt();
+        return choice;
+    }
     static void Driver()
     {
         FitnessCenter f1=new Gym();
@@ -58,23 +67,31 @@ public class L176310JavaConcepts
         System.out.println("Press 1 if you are a member.Press 2 if you are a regular client");
         Scanner input=new Scanner(System.in);
         int clientType=input.nextInt();
+       
         if(clientType==2)
         {
-            System.out.println("Press 1 if you want to join the Swimming Pool.Press 2 to join TennisCourt.Press 3 to join yogaCenter");
-            int choice=input.nextInt();
-            switch(choice)
+            System.out.println("In how many facilities do you want to register?");
+            int count=input.nextInt();
+            if (count <4)
             {
-                case 1:
-                    c1.availFacility(f2);
-                    break;
-                case 2:
-                    c1.availFacility(f3);
-                    break;
-                case 3:
-                    c1.availFacility(f4);
-                    break;
-            } 
-            
+                for(int i=0;i<count;i++)
+                {
+                    System.out.println(" \n Press 1 if you want to join the Swimming Pool.Press 2 to join TennisCourt.Press 3 to join yogaCenter");
+                    int choice=input.nextInt();
+                    switch(choice)
+                    {
+                        case 1:
+                            c1.availFacility(f2);
+                            break;
+                        case 2:
+                            c1.availFacility(f3);
+                            break;
+                        case 3:
+                            c1.availFacility(f4);
+                            break;
+                    } 
+                }
+                
            System.out.println("Your fee is  "+ c1.CalculateFee());
            String dueDate=(c1.CalculateDueDate());
            if(c1.RemoveOrKeep(dueDate,CurrDate)) 
@@ -82,17 +99,22 @@ public class L176310JavaConcepts
                f1.removeClient(c1);
            }
         }
-      if(clientType==1)
-      {
-           System.out.println("Your fee is  "+ c2.CalculateFee());
-           String dueDate=(c2.CalculateDueDate());
-           if(c2.RemoveOrKeep(dueDate,CurrDate)) 
-           {
-               f1.removeClient(c2);
-           }
-        
-      }
-         Upgrade(f1,f2,f3,f4);
+            }
+             if(clientType==1)
+             {
+               System.out.println("Your fee is  "+ c2.CalculateFee());
+               String dueDate=(c2.CalculateDueDate());
+               if(c2.RemoveOrKeep(dueDate,CurrDate)) 
+               {
+                   f1.removeClient(c2);
+               }
+             }
+      System.out.println("Request to Upgrade Regular");
+      Upgrade(c1,f1,f2,f3,f4);
+      System.out.println("Request to DownGrade Member");
+      DownGrade(c2,f1,f2,f3,f4);
        
     }
+
+    
 }

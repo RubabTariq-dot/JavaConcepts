@@ -7,6 +7,7 @@ package l176310.java.concepts.clientInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -40,4 +41,13 @@ public class Members extends Client
         facilities.add(y_center);
         y_center.addClient(this);
     }
+   
+   public void Remove(FitnessCenter gym,FitnessCenter s_pool,FitnessCenter t_court,FitnessCenter y_center)
+   {
+       gym.removeClient(this);
+       s_pool.removeClient(this);
+       t_court.removeClient(this);
+       y_center.removeClient(this);
+   }
+   
 }

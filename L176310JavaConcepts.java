@@ -60,7 +60,7 @@ public class L176310JavaConcepts
         int choice= input.nextInt();
         if(choice==1)
         {
-            Members m1=new Members(name,cnic,age,"11-7-19");
+            Members m1=new Members(name,cnic,age,"11-8-19");
             m1.client_id=1;
             m1.Avail(f1, f2, f3, f4);
             System.out.println("Press 1 to be see due date+fees");

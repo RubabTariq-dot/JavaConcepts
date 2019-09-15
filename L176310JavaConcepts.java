@@ -25,13 +25,13 @@ public class L176310JavaConcepts
     public static void main(String[] args) 
     {
         //QUESTION 1
-       // Game g1=new Game();
-       // g1.Run();
+        Game g1=new Game();
+        g1.Run();
         
        
         
         //QUESTION2
-        Driver();
+        //Driver();
         
     }
     
@@ -92,7 +92,7 @@ public class L176310JavaConcepts
            }
         
       }
-        
+         Upgrade(f1,f2,f3,f4);
        
     }
 }

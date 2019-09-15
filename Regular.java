@@ -25,8 +25,14 @@ public class Regular extends Client
    public void availFacility(FitnessCenter newFacility)
     {
         facilities.add(newFacility);
+        newFacility.addClient(this);
     }
     
+   public void removeFacility(FitnessCenter facility)
+   {
+       facilities.remove(facility);
+       facility.removeClient(this);
+   }
    public int CalculateFee()
     {
         int sum=0;
